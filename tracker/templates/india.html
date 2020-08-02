@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block title %}India State-Wise Tracker{% endblock %}
+
+
+
+{% block content %}
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div class="jumbotron">
+      <h1 class="display-4">Covid Tracker </h1>
+      <hr class="my-4">
+      <p class="lead"><b>Total Confirmed Cases</b> : &nbsp{{ api.confirmed }}</p>
+      <p class="lead"><b>Total Deaths </b>: &nbsp{{ api.deaths }}</p>
+      <p class="lead"><b>Total Recovered </b>: &nbsp{{ api.recovered }}</p>
+      <p class="lead"><b>Total Active </b>: &nbsp{{ api.active }}</p>
+      
+
+
+
+      <!-- <a class="btn btn-primary btn-lg" href="#" role="button">Go To Graph</a> -->
+    </div>
+
+<canvas id="myChart"></canvas>
+
+
+
+  </body>
+
+  <script>
+
+      var ctx = document.getElementById('myChart').getContext('2d');
+  var chart = new Chart(ctx, {
+      // The type of chart we want to create
+      type: 'bar',
+
+      // The data for our dataset
+      data: {
+          labels: ['Total Confirmed Cases', 'TotalRecovered', 'TotalDeaths','TotalActive'],
+          datasets: [{
+              label: 'Total Covid Cases',
+
+
+
+              backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.5)',
+                  'rgba(375, 98, 296, 0.4)',
+
+              ],
+
+              borderColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 99)',
+                  'rgba(195, 98, 132, 1)',
+
+              ],
+
+              data: [{{ api.confirmed }} , {{ api.recovered }}, {{ api.deaths }},{{ api.active }} ]
+          }]
+
+
+
+      },
+
+      // Configuration options go here
+      options: {}
+  });
+
+    </script>
+
+
+</html>
+
+
+
+  {% endblock %}
